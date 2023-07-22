@@ -1,0 +1,21 @@
+<!-- cart.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+</head>
+<body>
+  <h1>Shopping Cart</h1>
+  <% if (cartItems.length === 0) { %>
+    <p>Your cart is empty.</p>
+  <% } else { %>
+    <ul>
+      <% cartItems.forEach((item) => { %>
+        <li><%= item.name %> - Price: $<%= item.price %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+</body>
+</html>
