@@ -65,6 +65,32 @@ app.post('/cart/add/:itemId', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+// Serve the signup form
+app.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+// Handle the form submission to register a new user
+app.post('/signup', async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    // Check if the username and email are already registered
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existingUser) {
+      return res.status(409).send('Username or email already registered.');
+    }
+
+    // Create a new user
+    const newUser = new User({ username, email, password });
+    await newUser.save();
+
+    res.status(201).send('User registered successfully!');
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 // Start the server
 app.listen(port, () => {

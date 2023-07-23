@@ -5,6 +5,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shopping Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    li img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-right: 20px;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .item-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .item-price {
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
   <h1>Shopping Cart</h1>
@@ -13,9 +57,16 @@
   <% } else { %>
     <ul>
       <% cartItems.forEach((item) => { %>
-        <li><%= item.name %> - Price: $<%= item.price %></li>
+        <li>
+          <img src="/images/<%= item.image %>" alt="<%= item.name %>">
+          <div class="item-info">
+            <div class="item-name"><%= item.name %></div>
+            <div class="item-price">$<%= item.price %></div>
+          </div>
+        </li>
       <% }); %>
     </ul>
   <% } %>
 </body>
 </html>
+
